@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>ADELANTE</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item-group *ngFor="let ctg of home_data">
+
+    <!-- This is Category-->
+    <div *ngIf="ctg.term_id">
+
+      <ion-item-divider color="light" *ngIf="ctg.count"><h2><strong>{{ctg.name}}</strong></h2></ion-item-divider>
+      <div *ngFor="let post of ctg['posts_items']; let item_count = index"> 
+        <div *ngIf="post">
+            <div *ngIf="item_count == 0; then ctgfeatured; else ctgthumb">Loading...</div>
+        </div>
+          <ng-template #ctgfeatured>
+            <ion-card id="{{post.ID}}">
+              <img (click)="viewPost($event, post)" src="{{post.image}}"/>
+              <ion-card-content>
+                <ion-card-title>{{post.post_title}}</ion-card-title>
+                <p>{{post.post_excerpt}}</p>
+              </ion-card-content>
+              <ion-row no-padding>
+                <ion-col>
+                  <button ion-button clear small color="danger" icon-start>
+                    <ion-icon name='share-alt'></ion-icon>
+                    Share
+                  </button>
+                </ion-col>
+                <ion-col text-right>
+                  <button ion-button clear small color="danger" icon-start (click)="viewPost($event, post)">
+                    <ion-icon name='more'></ion-icon>
+                    Read More
+                  </button>
+                </ion-col>
+              </ion-row>
+            </ion-card>
+          </ng-template>
+          <ng-template #ctgthumb>
+            <ion-item id="{{post.ID}}">
+              <ion-thumbnail item-start>
+                <img (click)="viewPost($event, post)" src="{{post.image}}"/>
+              </ion-thumbnail>
+              <h2>{{post.post_title}}</h2>
+              <p>{{post.post_excerpt}}</p>
+              <button ion-button clear item-end (click)="viewPost($event, post)">View</button>
+            </ion-item>
+          </ng-template>
+      </div>
+
+    </div>
+
+    <!-- This is Ads-->
+    <div *ngIf="ctg.ad_name">
+      <div padding-top padding-bottom>
+        <div [innerHTML]="ctg.ad_code"></div>
+      </div>
+    </div>
+
+  </ion-item-group>
+
+
+</ion-content>

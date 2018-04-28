@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{selectedPost.post_title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-fab right bottom>
+    <button ion-fab mini>
+      <ion-icon name="share"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+      <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
+      <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <div class="post_featured">
+    <img src="{{selectedPost.image}}" width="100%" height="auto">
+      <ion-row padding class="info">
+        <ion-col>
+          <ion-icon name="list-box"></ion-icon>  Beauty
+        </ion-col>
+        <ion-col text-right>
+          {{post_data}}  <ion-icon name="calendar"></ion-icon>
+        </ion-col>
+      </ion-row>
+  </div>
+
+  <div class="post_info">
+    <ion-item-divider color="primary">
+      <p class="post_title">{{selectedPost.post_title}}</p>
+      <p class="post_author">By Mark Conan</p>
+    </ion-item-divider>
+  </div>
+
+  <div padding>
+    <div class="post_content">
+      <div [innerHTML]="selectedPost.post_content"></div>
+    </div>
+  </div>
+  
+</ion-content>
